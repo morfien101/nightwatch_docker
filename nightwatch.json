@@ -1,0 +1,41 @@
+{
+  "src_folders" : ["tests"],
+  "output_folder" : "reports",
+  "custom_commands_path" : "",
+  "custom_assertions_path" : "",
+  "page_objects_path" : "",
+  "globals_path" : "globals.js",
+  "live_output" : true,
+
+  "selenium" : {
+    "start_process" : false,
+    "cli_args" : {
+      "webdriver.chrome.driver" : "node_modules/chromedriver/lib/chromedriver/chromedriver"
+    }
+  },
+
+  "test_settings" : {
+    "default" : {
+      "selenium_port"  : 9515,
+      "selenium_host"  : "localhost",
+      "default_path_prefix" : "",
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "chromeOptions" : {
+          "args" : ["--no-sandbox"]
+        },
+        "acceptSslCerts": true
+      },
+      "videos": {
+        "enabled": true,
+        "delete_on_success": false,
+        "path": "/root/nightwatch/videos",
+        "format": "mp4",
+        "resolution": "1440x900",
+        "fps": 15,
+        "display": ":40",
+        "pixel_format": "yuv420p"
+      }
+    }
+  }
+}
