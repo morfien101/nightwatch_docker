@@ -1,9 +1,9 @@
 {
   "src_folders" : ["tests"],
   "output_folder" : "reports",
-  "custom_commands_path" : "",
-  "custom_assertions_path" : "",
-  "page_objects_path" : "",
+  "custom_commands_path" : "custom_commands",
+  "custom_assertions_path" : "custom_assertions",
+  "page_objects_path" : "page_objects",
   "globals_path" : "globals.js",
   "live_output" : true,
 
@@ -27,7 +27,7 @@
         "acceptSslCerts": true
       },
       "videos": {
-        "enabled": true,
+        "enabled": false,
         "delete_on_success": false,
         "path": "/root/nightwatch/videos",
         "format": "mp4",

@@ -1,7 +1,7 @@
 FROM ubuntu:16.10
 MAINTAINER morfien101@gmail.com
 
-COPY ./startup.sh /startup.sh
+
 # Pre-req packages for Chrome and NodeJS
 RUN apt-get update -y \
     && apt-get install -y build-essential checkinstall libssl-dev curl vim wget ffmpeg \
@@ -23,13 +23,12 @@ RUN apt-get update -y \
     && dpkg -i google-chrome.deb \
     && rm -f google-chrome.deb \
     && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash \
-    && chmod 755 /startup.sh \
-    && mkdir -p /root/nightwatch/{tests,reports,videos} \
+    && for d in "tests" "reports" "videos" "custom_commands" "custom_assertions" "page_objects"; do mkdir -p /root/nightwatch/$d; done \
+    && ls -lha /root/nightwatch \
     && rm -rf /tmp/*
 
-COPY ./install_nightwatch.sh install_nightwatch.sh
-
 # We need a new session to be created.
+COPY ./install_nightwatch.sh install_nightwatch.sh
 RUN chmod 755 install_nightwatch.sh \
     && bash -c ./install_nightwatch.sh
 # Add in some default config files.
@@ -38,5 +37,8 @@ COPY ./nightwatch.json /root/nightwatch/nightwatch.json
 
 # Remember to setup the faki frames thing.
 # Run from home folder
+COPY ./startup.sh /startup.sh
+RUN chmod 755 /startup.sh
+
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD ["/startup.sh"]
